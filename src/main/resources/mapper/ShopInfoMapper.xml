@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.me.test.mapper.ShopInfoMapper">
+
+    <select id="queryAll" resultType="ShopInfoPlusName">
+        select s.shopID,s.productID,p.name as productName,s.count,s.totalCost, p.`describe` from product.shop_info s,product.product_info p where s.count>0 and s.productID=p.id;
+    </select>
+
+    <update id="decrease" parameterType="int">
+        update product.shop_info set totalCost = totalCost - (totalCost / count), count = count - 1 where productID = #{id};
+    </update>
+
+
+
+    <update id="increase" parameterType="int">
+        update product.shop_info set totalCost = totalCost + (totalCost / count), count = count + 1 where productID = #{id};
+    </update>
+
+</mapper>

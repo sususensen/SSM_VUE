@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.me.test.mapper.ProductInfoMapper">
+
+    <insert id="add" parameterType="ProductInfo">
+        insert into product.product_info (name,number,price,`describe`)
+         values (#{name},#{number},#{price},#{describe});
+    </insert>
+
+    <delete id="delete" parameterType="int">
+        delete from product.product_info where id = #{id};
+    </delete>
+
+    <update id="update" parameterType="ProductInfo">
+        update product.product_info set name=#{name},number=#{number},price=#{price},`describe`=#{describe}
+        where id=#{id};
+    </update>
+
+    <select id="queryById" parameterType="int" resultType="ProductInfo">
+        select * from product.product_info where id=#{id};
+    </select>
+
+    <select id="queryAll" resultType="ProductInfo">
+        select * from product.product_info;
+    </select>
+
+    <insert id="addNewToShop" parameterType="ShopInfo">
+        insert into product.shop_info (productID,count,totalCost) values (#{productID},#{count},#{totalCost});
+    </insert>
+
+    <update id="updateShopInfo" parameterType="ShopInfo" >
+        update product.shop_info set count=#{count},totalCost=#{totalCost} where productID=#{productID};
+    </update>
+
+    <select id="queryShopInfo" parameterType="int" resultType="ShopInfo">
+        select * from product.shop_info where productID=#{id};
+    </select>
+</mapper>
